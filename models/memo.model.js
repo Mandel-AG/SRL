@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const memoSchema = mongoose.Schema({
+const memoSchema = new mongoose.Schema({
   title:{
     type:String,
     require:true
@@ -11,6 +11,9 @@ const memoSchema = mongoose.Schema({
   },
   date:{
     type:{}
+  },
+  dateNow:{
+    type:Number
   }
 },{
   timestamps : true

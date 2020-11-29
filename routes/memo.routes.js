@@ -1,24 +1,18 @@
 const express = require('express');
 const app = express.Router();
 
-const { createModel } = require('../controllers/memo.controller');
+const { createMemo, getMemos, updateMemo, deleteMemo } = require('../controllers/memo.controller');
 
 
-app.get('/', (req, res, next) => {
+app.get('/', getMemos)
 
-})
-
-app.post('/createMemo', createModel)
+app.post('/createMemo', createMemo)
 
 
-app.post('/updateMemo', (req, res, next) => {
-  
-})
+app.post('/updateMemo/:id',updateMemo)
 
 
-app.post('/deleteMemo', (req, res, next) => {
-  
-})
+app.post('/deleteMemo/:id', deleteMemo)
 
 
 module.exports = app;

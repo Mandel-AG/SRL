@@ -1,11 +1,11 @@
 const express = require('express'),
 app = express();
-
 require('dotenv').config();
+const routing = require('./routes/index'); 
+
 require('./database/index');
 
 
-const routing = require('./routes/index'); 
 
 exports.app = app;
 
@@ -15,7 +15,7 @@ exports.app = app;
 app.use(express.urlencoded({extended:false}));
 app.use(express.json());
 
-app.use(routing)
+app.use(routing);
 
 
 
