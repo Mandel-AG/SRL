@@ -3,8 +3,12 @@ const Memo = require('../models/memo.model');
 
 exports.getMemos = async(req, res, next) => {
   try{
+    // const memos = await Memo.find({_id:req.user[0]._id})
+
+    // console.log(req.user[0].id)
     const memos = await Memo.find()
-    res.json(memos)
+    res.send(memos)
+    // res.render('homePage',{user:null, memos})
   }
   catch(error){
     next(error)
@@ -47,6 +51,7 @@ exports.updateMemo = async(req, res, next) => {
     next(error)
   }
 }
+
 
 
 exports.deleteMemo = async(req, res, next) => {

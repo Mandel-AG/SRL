@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
   date:{
     type:Date
   },
-  memoId:{
+  memos:{
     type:mongoose.Schema.Types.ObjectId,
     ref: "Memo",
   }

@@ -6,6 +6,10 @@ const { createMemo, getMemos, updateMemo, deleteMemo } = require('../controllers
 
 app.get('/', getMemos)
 
+app.get('/addMemo', (req, res, next)=>{
+  res.render('addMemo')
+})
+
 app.post('/createMemo', createMemo)
 
 
