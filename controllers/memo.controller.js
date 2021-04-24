@@ -1,34 +1,36 @@
-const Memo = require('../models/memo.model');
+const User = require("../models/user.model");
+const Memo = require('../models/memo.model')
 
 
-exports.getMemos = async(req, res, next) => {
-  try{
-    // const memos = await Memo.find({_id:req.user[0]._id})
+// exports.getMemos = async(req, res, next) => {
+//   try{
+//     const user = await User.find({_id:req.user[0]._id})
 
-    // console.log(req.user[0].id)
-    const memos = await Memo.find()
-    res.send(memos)
-    // res.render('homePage',{user:null, memos})
-  }
-  catch(error){
-    next(error)
-  }
-}
+//     res.send(user.memos)
+//     // res.render('homePage',{user:null, memos})
+//   }
+//   catch(error){
+//     next(error)
+//   }
+// }
+
 
 
 
 exports.createMemo = async(req, res, next) => {
   try{
     const { title, content } = req.body;
-    const newMemo = new Memo({
+    const newMemo = {
       title: title,
       content: content,
       date : new Date().toLocaleDateString().split(":"),
       dateNow: Date.now(),
       unique: true
-    })
-    await newMemo.save()
-    res.send(newMemo)
+    }
+    const currentUser = await User.findById({_id:req.user[0]._id})
+    currentUser.memos.push(newMemo)
+    await currentUser.save()
+    res.send(currentUser)
   }
   catch(error){
     next(error)
@@ -39,20 +41,26 @@ exports.createMemo = async(req, res, next) => {
 
 exports.updateMemo = async(req, res, next) => {
   try{
-    const memoId = req.params.id;
     const {title, content} = req.body;
-    const newMemo = await Memo.findOneAndUpdate({_id:memoId},
-      {$set:{title:title, content:content}},
-      {new:true}
-    )
-    res.json(newMemo)
+    const memoId = req.params.id;    
+    
+    await User.findOne({_id:req.user[0]._id}).exec()
+    .then(el => {
+      const user = el;
+      const memoToUpdate = el.memos.filter(memo => memo._id == memoId) 
+      memoToUpdate[0].title = title
+      memoToUpdate[0].content = content 
+      user.markModified('memos')
+      user.save()
+      res.send(user)
+    })
+  
+    .catch(e => next(e))
   }
   catch(error){
     next(error)
   }
 }
-
-
 
 exports.deleteMemo = async(req, res, next) => {
   try{

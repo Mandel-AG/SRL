@@ -1,4 +1,25 @@
 const mongoose = require('mongoose');
+const memoSchema = require('./memo.model');
+
+
+// const memoSchema = new mongoose.Schema({
+//   title:{
+//     type:String,
+//     require:true
+//   },
+//   content:{
+//     type:String,
+//     required:true
+//   },
+//   date:{
+//     type:{}
+//   },
+//   dateNow:{
+//     type:Number
+//   }
+// },{
+//   timestamps : true
+// })
 
 const userSchema = mongoose.Schema({
   email:{
@@ -17,8 +38,7 @@ const userSchema = mongoose.Schema({
     type:Date
   },
   memos:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref: "Memo",
+    type:[memoSchema] 
   }
 },{
   timestamps: true

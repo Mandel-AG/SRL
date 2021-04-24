@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express.Router();
 
-const { createMemo, getMemos, updateMemo, deleteMemo } = require('../controllers/memo.controller');
+const { createMemo, updateMemo, deleteMemo } = require('../controllers/memo.controller');
 
 
-app.get('/', getMemos)
+// app.get('/', getMemos)
 
 app.get('/addMemo', (req, res, next)=>{
   res.render('addMemo')

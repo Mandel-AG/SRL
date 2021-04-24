@@ -20,5 +20,5 @@ const memoSchema = new mongoose.Schema({
 })
 
 
-module.exports = mongoose.model('Memo', memoSchema)
+// module.exports = mongoose.model('Memo', memoSchema)
 
