@@ -2,20 +2,6 @@ const User = require("../models/user.model");
 const Memo = require('../models/memo.model')
 
 
-// exports.getMemos = async(req, res, next) => {
-//   try{
-//     const user = await User.find({_id:req.user[0]._id})
-
-//     res.send(user.memos)
-//     // res.render('homePage',{user:null, memos})
-//   }
-//   catch(error){
-//     next(error)
-//   }
-// }
-
-
-
 
 exports.createMemo = async(req, res, next) => {
   try{
@@ -65,8 +51,18 @@ exports.updateMemo = async(req, res, next) => {
 exports.deleteMemo = async(req, res, next) => {
   try{
     const memoId = req.params.id;
-    await Memo.findByIdAndDelete({_id:memoId})
-    res.json("Le mémo est éffacé!")
+    await User.findOne({_id:req.user[0]._id}).exec()
+    .then(el => {
+      const user = el;
+      const memoTodelete = el.memos.filter(memo => memo._id == memoId).splice(0,1)
+      const indexMemoToDelete = user.memos.indexOf(memoTodelete[0]);
+      user.memos.splice(indexMemoToDelete,1)
+      user.markModified('memos')
+      user.save()
+      res.send(user)
+    })
+  
+    .catch(e => next(e))
   }
   catch(error){
     next(error)
