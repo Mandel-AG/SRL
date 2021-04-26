@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
-const Memo = require('../models/memo.model')
+const Memo = require('../models/memo.model');
+const {delaySending} = require('./Mail.controller');
 
 
 
@@ -10,12 +11,15 @@ exports.createMemo = async(req, res, next) => {
       title: title,
       content: content,
       date : new Date().toLocaleDateString().split(":"),
+      dateFromUpdating:Date.now(),
       dateNow: Date.now(),
       unique: true
     }
     const currentUser = await User.findById({_id:req.user[0]._id})
     currentUser.memos.push(newMemo)
     await currentUser.save()
+    sendMail(newMemo)
+    delaySending(newMemo)
     res.send(currentUser)
   }
   catch(error){
@@ -36,8 +40,10 @@ exports.updateMemo = async(req, res, next) => {
       const memoToUpdate = el.memos.filter(memo => memo._id == memoId) 
       memoToUpdate[0].title = title
       memoToUpdate[0].content = content 
+      memoToUpdate[0].dateFromUpdating = Date.now() 
       user.markModified('memos')
       user.save()
+      delaySending(memoToUpdate[0])
       res.send(user)
     })
   

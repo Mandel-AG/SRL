@@ -2,25 +2,6 @@ const mongoose = require('mongoose');
 const memoSchema = require('./memo.model');
 
 
-// const memoSchema = new mongoose.Schema({
-//   title:{
-//     type:String,
-//     require:true
-//   },
-//   content:{
-//     type:String,
-//     required:true
-//   },
-//   date:{
-//     type:{}
-//   },
-//   dateNow:{
-//     type:Number
-//   }
-// },{
-//   timestamps : true
-// })
-
 const userSchema = mongoose.Schema({
   email:{
     type:String,
@@ -30,9 +11,6 @@ const userSchema = mongoose.Schema({
   password:{
     type:String,
     required: true
-  },
-  avatar:{
-    type:String
   }, 
   date:{
     type:Date

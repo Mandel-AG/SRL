@@ -14,6 +14,9 @@ const memoSchema = new mongoose.Schema({
   },
   dateNow:{
     type:Number
+  },
+  dateFromUpdating:{
+    type:{}
   }
 },{
   timestamps : true
