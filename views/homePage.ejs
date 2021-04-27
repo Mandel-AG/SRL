@@ -15,10 +15,10 @@
 
     <h1>Welcome On the homepage</h1>
 
-    <% if (user && memos){ %>
+    <% if (user){ %>
     <h1><%= user.email %></h1>
       <div>
-        <% memos.forEach(function(eachMemo){ %>
+        <% user.memos.forEach(function(eachMemo){ %>
           <h1><% eachMemo.title %></h1>
           <h1><% eachMemo.content %></h1>
           <% }); %>      </div>
