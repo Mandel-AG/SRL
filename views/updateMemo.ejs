@@ -10,18 +10,18 @@
 </head>
 <body>
   
-    <a href="/homePage">To homepage</a>
+    <a href="/homepage">To homepage</a>
 
   
     <form method="POST" action="/memo/createMemo" >
       <div>
         <label>Title</label>
-        <input name="title" type="text" />
+        <input name="title" type="text" value="<%= memo[0].title %>" >
       </div>
 
       <div>
         <label>Content</label>
-        <textarea name="content" type="textArea"> </textArea>
+        <textarea name="content" rows="20" type="textArea"> <%= memo[0].title %> </textArea>
       </div>
 
       <button>Submit</button>

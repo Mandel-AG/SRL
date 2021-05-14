@@ -36,8 +36,9 @@ const addJwtFeatures = (req, res, next) => {
   req.login = async(userId) => {
     const token = await createToken(userId)
     res.cookie('token',token)
-    const user = await User.findById({_id:userId})
-    res.render('homePage',{user})
+    // const user = await User.findById({_id:userId})
+    // res.render('homePage',{user})
+    res.redirect('/homepage')
   }
   next();
 }

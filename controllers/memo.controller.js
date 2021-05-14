@@ -8,6 +8,7 @@ exports.createMemo = async(req, res, next) => {
   try{
     const { title, content } = req.body;
     const newMemo = {
+      _id:Math.random(),
       title: title,
       content: content,
       date : new Date().toLocaleDateString().split(":"),
@@ -18,9 +19,9 @@ exports.createMemo = async(req, res, next) => {
     const currentUser = await User.findById({_id:req.user[0]._id})
     currentUser.memos.push(newMemo)
     await currentUser.save()
-    sendMail(newMemo)
-    delaySending(newMemo)
-    res.send(currentUser)
+    // sendMail(newMemo)
+    // delaySending(newMemo)
+    res.redirect('/homepage')
   }
   catch(error){
     next(error)
@@ -43,8 +44,10 @@ exports.updateMemo = async(req, res, next) => {
       memoToUpdate[0].dateFromUpdating = Date.now() 
       user.markModified('memos')
       user.save()
-      delaySending(memoToUpdate[0])
-      res.send(user)
+      // delaySending(memoToUpdate[0])
+      // res.send(user)
+      res.redirect('/homepage')
+
     })
   
     .catch(e => next(e))
@@ -65,7 +68,10 @@ exports.deleteMemo = async(req, res, next) => {
       user.memos.splice(indexMemoToDelete,1)
       user.markModified('memos')
       user.save()
-      res.send(user)
+      .then(e => {
+        res.render('homePage',{user:user})
+
+      })
     })
   
     .catch(e => next(e))

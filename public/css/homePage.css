@@ -1,0 +1,72 @@
+.header {
+	background-color: red;
+	height: 12vh;
+	position: relative;
+}
+
+.header__title {
+	width: 100%;
+	text-align: center;
+	margin-bottom: 1.5em;
+}
+
+.header__nav {
+	display: flex;
+	flex-direction: row;
+	width: 70%;
+	margin: auto;
+	justify-content: space-around;
+}
+
+.header__logout {
+	position: absolute;
+	right: 2em;
+	top: 2em;
+}
+
+.container__memos {
+	display: flex;
+	width: 90%;
+	flex-wrap: wrap;
+	margin: auto;
+}
+
+.eachMemo {
+	height: 15em;
+	width: 10em;
+	margin: 2em;
+	display: flex;
+	flex-direction: column;
+}
+
+.memo__border {
+	border: 1px solid black;
+	height: 90%;
+	width: 100%;
+	margin-bottom: 1em;
+	padding: 1em;
+}
+
+.memo__border__content {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	font-size: xx-small;
+	margin: 2em 0;
+}
+
+.memo__border__title {
+	font-size: x-small;
+	text-align: center;
+}
+
+.memo__title {
+	text-align: center;
+	width: 100%;
+}
+
+.disabledResize {
+	resize: none;
+	background-color: transparent;
+	border: none;
+}

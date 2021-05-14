@@ -14,6 +14,15 @@ app.get('/register', (req, res ,next)=> {
   res.render('register')
 })
 
+app.get("/homepage" , checkAuthentification, (req, res, next) => {
+  const user = req.user[0]
+  res.render('homePage',{user})
+})
+
+
+
+
+
 
 
 

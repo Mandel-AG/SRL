@@ -1,0 +1,13 @@
+
+    <% user.memos.forEach(function(eachMemo){ %>
+      <div class="eachMemo" >
+        <i class="fas fa-camera" memoId="<%= eachMemo._id%>"></i> 
+        <i class="fas fa-trash-alt" memoId="<%= eachMemo._id%>"></i>
+        <div class="memo__border" >
+            <p class="memo__border__title"><%= eachMemo.title %></p>
+          <textarea disabled rows="15"  class="memo__border__content disabledResize"><%= eachMemo.content %></textarea>
+        </div>
+        <p class="memo__title"><%= eachMemo.title %></p>
+      </div>
+      <% }); %>     
+  
